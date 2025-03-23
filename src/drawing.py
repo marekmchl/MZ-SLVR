@@ -1,3 +1,5 @@
+from math import floor
+
 class Point():
     def __init__(self, x=0, y=0):
         self.x = x
@@ -39,3 +41,19 @@ class Cell():
         if self.has_right_wall:
             wall = Line(Point(self.x2, self.y1), Point(self.x2, self.y2))
             wall.draw(self._win.canvas, fill_color)
+
+    def draw_move(self, to_cell, undo=False):
+        center_1 = Point(
+            (self.x2 + self.x1) / 2,
+            (self.y1 + self.y2) / 2)
+
+        center_2 = Point(
+            (to_cell.x2 + to_cell.x1) / 2,
+            (to_cell.y1 + to_cell.y2) / 2)
+
+        path = Line(center_1, center_2)
+
+        if not undo:
+            path.draw(self._win.canvas, "red")
+        else:
+            path.draw(self._win.canvas, "gray")
