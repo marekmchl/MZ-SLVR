@@ -1,5 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
-from drawing import Line
+from tkinter import Tk, Canvas
 
 class Window():
     def __init__(self, width, height):
@@ -8,8 +7,9 @@ class Window():
         self.__root_widget = Tk()
         self.__root_widget.title("MZ-SLVR: The maze solver")
         self.__root_widget.protocol("WM_DELETE_WINDOW", self.close)
+        self.__root_widget.geometry(f"{width}x{height}")
         self.canvas = Canvas(self.__root_widget)
-        self.canvas.pack(side="top")
+        self.canvas.pack(anchor="center", fill="both")
         self.window_is_running = False
 
     def redraw(self):
