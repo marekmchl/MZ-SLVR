@@ -14,6 +14,8 @@ def main():
         for j in range(rows_y):
             maze._draw_cell(i, j)
 
+    maze._break_walls_r(0, 0)
+
     maze._break_entrance_and_exit()
 
     win.wait_for_close()
