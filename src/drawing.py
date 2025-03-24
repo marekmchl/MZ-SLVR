@@ -67,7 +67,7 @@ class Maze():
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
         self._win = win
-        self._cells = []
+        self._cells = self._create_cells()
 
     def _create_cells(self):
         row = []
@@ -83,7 +83,7 @@ class Maze():
                 y1 = y2
             x1 = x2
             row.append(col)
-        self._cells = row
+        return row
 
     def _draw_cell(self, i, j):
         self._cells[i][j].draw("black")
