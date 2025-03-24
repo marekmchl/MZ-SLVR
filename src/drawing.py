@@ -156,3 +156,8 @@ class Maze():
                 new_cell.has_down_wall = False
 
             self._break_walls_r(new_i, new_j)
+
+    def _reset_cells_visited(self):
+        for cols in self._cells:
+            for cell in cols:
+                cell.visited = False

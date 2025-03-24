@@ -15,6 +15,7 @@ def main():
             maze._draw_cell(i, j)
 
     maze._break_walls_r(0, 0)
+    maze._reset_cells_visited()
 
     maze._break_entrance_and_exit()
 
