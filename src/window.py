@@ -9,7 +9,7 @@ class Window():
         self.__root_widget.protocol("WM_DELETE_WINDOW", self.close)
         self.__root_widget.geometry(f"{width}x{height}")
         self.canvas = Canvas(self.__root_widget)
-        self.canvas.pack(anchor="center", fill="both")
+        self.canvas.pack(anchor="center", fill="both", expand=True)
         self.window_is_running = False
 
     def redraw(self):
