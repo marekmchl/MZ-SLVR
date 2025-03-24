@@ -1,25 +1,19 @@
 from window import Window
-from drawing import Cell
+from drawing import Maze
 
 def main():
     win = Window(800, 600)
-
-    cell_1 = Cell(4, 4, 254, 254, win)
-    cell_1.has_right_wall = False
-
-    cell_2 = Cell(254, 4, 504, 254, win)
-    cell_2.has_right_wall = False
-    cell_2.has_left_wall = False
-
-    cell_3 = Cell(504, 4, 754, 254, win)
-    cell_3.has_left_wall = False
-
-    cell_1.draw("black")
-    cell_2.draw("black")
-    cell_3.draw("black")
-
-    cell_1.draw_move(cell_2)
-    cell_2.draw_move(cell_3, undo=True)
+    start_x = 4
+    start_y = start_x
+    rows_x = 10
+    rows_y = rows_x
+    size_x = 100
+    size_y = size_x
+    maze = Maze(start_x, start_y, rows_x, rows_y, size_x, size_y, win)
+    maze._create_cells()
+    for i in range(rows_x):
+        for j in range(rows_y):
+            maze._draw_cell(i, j)
 
     win.wait_for_close()
 

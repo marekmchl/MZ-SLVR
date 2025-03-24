@@ -1,4 +1,4 @@
-from math import floor
+from time import sleep
 
 class Point():
     def __init__(self, x=0, y=0):
@@ -57,3 +57,39 @@ class Cell():
             path.draw(self._win.canvas, "red")
         else:
             path.draw(self._win.canvas, "gray")
+
+class Maze():
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win):
+        self.x1 = x1
+        self.y1 = y1
+        self.num_rows = num_rows
+        self.num_cols = num_cols
+        self.cell_size_x = cell_size_x
+        self.cell_size_y = cell_size_y
+        self._win = win
+        self._cells = []
+
+    def _create_cells(self):
+        row = []
+        x1 = self.x1
+        for i in range(self.num_cols):
+            col = []
+            x2 = x1 + self.cell_size_x
+            y1 = self.y1
+            for j in range(self.num_rows):
+                y2 = y1 + self.cell_size_y
+                cell = Cell(x1, y1, x2, y2, self._win)
+                col.append(cell)
+                y1 = y2
+            x1 = x2
+            row.append(col)
+        self._cells = row
+
+    def _draw_cell(self, i, j):
+        self._cells[i][j].draw("black")
+        self._animate()
+
+    def _animate(self):
+        win = self._win
+        win.redraw()
+        sleep(0.05)
