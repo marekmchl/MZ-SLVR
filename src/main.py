@@ -11,6 +11,8 @@ def main():
     size_y = size_x
     maze = Maze(start_x, start_y, rows_x, rows_y, size_x, size_y, win)
 
+    maze.solve()
+
     win.wait_for_close()
 
 main()

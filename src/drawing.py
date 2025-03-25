@@ -170,3 +170,32 @@ class Maze():
         for cols in self._cells:
             for cell in cols:
                 cell.visited = False
+
+    def solve(self):
+        return self._solve_r(0, 0)
+
+    def _solve_r(self, i, j):
+        self._animate()
+        self._cells[i][j].visited = True
+        if i == self.num_cols-1 and j == self.num_rows-1:
+            return True
+
+        directions = []
+        if i > 0 and not self._cells[i][j].has_left_wall and not self._cells[i-1][j].visited:               # left
+            directions.append((i-1, j))
+        if i < self.num_cols - 1 and not self._cells[i][j].has_right_wall and not self._cells[i+1][j].visited:  # right
+            directions.append((i+1, j))
+        if j > 0 and not self._cells[i][j].has_top_wall and not self._cells[i][j-1].visited:                # up
+            directions.append((i, j-1))
+        if j < self.num_rows - 1 and not self._cells[i][j].has_bottom_wall and not self._cells[i][j+1].visited: # down
+            directions.append((i, j+1))
+
+        for new_i, new_j in directions:
+            self._cells[i][j].draw_move(self._cells[new_i][new_j])              # draw path
+            if self._solve_r(new_i, new_j):
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[new_i][new_j], undo=True)   # undo path
+
+
+        return False
