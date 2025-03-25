@@ -82,9 +82,13 @@ class Maze():
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
         self._win = win
-        self._cells = self._create_cells()
+        self._cells = []
         if seed != None:
             self.seed = random.seed(seed)
+        self._create_cells()
+        self._break_walls_r(0, 0)
+        self._reset_cells_visited()
+        self._break_entrance_and_exit()
 
     def _create_cells(self):
         row = []
@@ -100,7 +104,12 @@ class Maze():
                 y1 = y2
             x1 = x2
             row.append(col)
-        return row
+        self._cells = row
+        for i in range(self.num_cols):
+            for j in range(self.num_rows):
+                self._draw_cell(i, j)
+
+
 
     def _draw_cell(self, i, j):
         self._cells[i][j].draw("black")
