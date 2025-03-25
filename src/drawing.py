@@ -146,7 +146,7 @@ class Maze():
 
             if len(to_visit) == 0:
                 self._draw_cell(i, j)
-                break
+                return
 
             new_i, new_j = random.choice(to_visit)
 
@@ -158,11 +158,11 @@ class Maze():
                 current_cell.has_left_wall = False
                 new_cell.has_right_wall = False
             elif new_j - j == 1:
-                current_cell.has_down_wall = False
+                current_cell.has_bottom_wall = False
                 new_cell.has_top_wall = False
             elif new_j - j == -1:
                 current_cell.has_top_wall = False
-                new_cell.has_down_wall = False
+                new_cell.has_bottom_wall = False
 
             self._break_walls_r(new_i, new_j)
 
